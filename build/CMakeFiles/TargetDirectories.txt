@@ -1,0 +1,4 @@
+/home/clr/workspace/new_cicd/build/CMakeFiles/rebuild_cache.dir
+/home/clr/workspace/new_cicd/build/CMakeFiles/edit_cache.dir
+/home/clr/workspace/new_cicd/build/CMakeFiles/test.dir
+/home/clr/workspace/new_cicd/build/CMakeFiles/test_math_utils.dir
