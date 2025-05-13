@@ -1,9 +1,51 @@
-    - name: Build the Project
-      run: |
-        # Check if the build directory exists and create it if not
-        if [ ! -d "build" ]; then
+name: C++ CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up CMake
+        uses: actions/setup-cmake@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake g++ gtest
+
+      - name: Build the project
+        run: |
           mkdir build
-        fi
-        cd build
-        cmake ..
-        make
+          cd build
+          cmake ..
+          make
+
+      - name: Run tests
+        run: |
+          cd build
+          ./test_main  # Run the test executable (you can add more tests here)
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: success()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy (placeholder)
+        run: |
+          echo "Deploying to server or cloud service..."
+          # Insert deployment commands here if needed
